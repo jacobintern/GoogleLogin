@@ -6,17 +6,29 @@
 </head>
 
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div id="signInArea" class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div id="signOutArea" style="display: none;">
+        <a href="#" onclick="signOut();">Sign out</a>
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+    integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
-    // function onSignIn(googleUser) {
-    //     var profile = googleUser.getBasicProfile();
-    //     console.log('ID: ' + profile.getId());
-    //     console.log('Name: ' + profile.getName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail());
-    // }
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        $("#signInArea").hide();
+        $("#signOutArea").show();
+        console.log(profile);
+    }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            $("#signInArea").show();
+            $("#signOutArea").hide();
+            console.log("User signed out");
+        })
+    }
 </script>
 
 </html>
