@@ -17,9 +17,11 @@
 <script>
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
+        var id_token = googleUser.getAuthResponse().id_token;
         $("#signInArea").hide();
         $("#signOutArea").show();
         console.log(profile);
+        console.log(id_token);
     }
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
